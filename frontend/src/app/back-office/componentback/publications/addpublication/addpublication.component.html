@@ -1,0 +1,94 @@
+
+
+
+
+        
+
+  <h6> Ajouter les publications </h6>
+  
+  <form class="form-horizontal" role="form" #f="ngForm" s>
+    
+
+
+    <div class="form-group">
+      <label class="col-lg-3 control-label">id_user </label>
+      <div class="col-lg-8">
+        <input class="form-control" type="number" name="id_user" [(ngModel)]="pub.id_user" #id="ngModel" required placeholder="Add id .....">
+        <div *ngIf="id.touched && id.invalid" class="alert alert-danger">
+          <div *ngIf="id.errors?.['required']">  id est obligatoire</div>
+        </div>
+      </div>
+    </div><br>
+    
+    
+    <div class="form-group">
+      <label class="col-lg-3 control-label">nom_pub:</label>
+      <div class="col-lg-8">
+        <input class="form-control" type="text" name="nom_pub" [(ngModel)]="pub.nom_pub" #id="ngModel" required placeholder="Add nom de publication .....">
+        <div *ngIf="id.touched && id.invalid" class="alert alert-danger">
+          <div *ngIf="id.errors?.['required']">  le nom est obligatoire</div>
+      </div>
+    </div>
+    </div><br>
+
+
+    <div class="form-group">
+      <label class="col-lg-3 control-label">extension_status:</label>
+      <div class="col-lg-8">
+        <input class="form-control" type="text" name="extension_status" [(ngModel)]="pub.extension_status" #ex="ngModel"  required placeholder="Add extension publication .....">
+        <div *ngIf="ex.touched && ex.invalid" class="alert alert-danger">
+          <div *ngIf="ex.errors?.['required']">  le nom est obligatoire</div>
+      </div>
+    </div>
+    </div><br>
+
+    <div class="form-group">
+      <label class="col-lg-3 control-label">extension_video:</label>
+      <div class="col-lg-8">
+        <input class="form-control" type="text" value="extension_video">
+      </div>
+    </div>
+  
+  <br>
+
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Type:</label>
+      <div class="col-lg-8">
+        <div class="ui-select">
+          <select id="user_time_zone" class="form-control" name="type" [(ngModel)]="pub.type" #ty="ngModel">
+            
+              <option selected>choose</option>
+            <option value="1">photo</option>
+            <option value="2">video</option>
+            
+            <option value="3">status</option>
+            
+          </select>
+          <div *ngIf="ty.touched && ty.invalid" class="alert alert-danger">
+              <div *ngIf="ty.errors?.['required']">  le type est obligatoire</div>
+        </div>
+        </div>
+        </div>
+      </div><br>
+
+
+      <div class="form-group">
+          <label class="col-lg-3 control-label">picture:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="file" name="picture" [(ngModel)]="pub.picture" [(ngModel)]="pub.picture" required placeholder="Add picture de publication .....">
+           
+        </div>
+    </div>
+  
+
+
+
+<div>
+<button type="submit" class="btn btn-primary" [disabled]="f.invalid">Add publication</button>
+<hr>
+</div>
+  </form>
+
+
+
+

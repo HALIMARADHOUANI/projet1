@@ -1,0 +1,14 @@
+.row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 20px;
+}
+
+.btn-add {
+  height: 40px;
+  width: 150px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+

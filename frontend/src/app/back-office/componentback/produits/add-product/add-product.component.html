@@ -1,0 +1,55 @@
+<div class="row">
+
+  <h1>{{action}}  Produit</h1>
+  <form [formGroup]="formProduct">
+    <div class="form-group col-md-6">
+      <label>Nom produit:</label>
+      <input type="text" required formControlName="nom" name="nom" class="form-control">
+      <div class=" alert alert-danger"
+           *ngIf=" form.nom.touched &&  form.nom.errors  | onlyOneError:['required','minlength'] as error ">
+        <p *ngIf="error.required">nom is required</p>
+        <p *ngIf="error.minlength">minlength is equal to 3</p>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Reference:</label>
+      <input type="text" required formControlName="reference" name="reference"
+             class="form-control">
+      <div class=" alert alert-danger"
+           *ngIf="form.reference.touched &&  form.reference.errors  | onlyOneError:['required','minlength'] as error">
+        <p *ngIf="error.hasError('required')">this fiels is required</p>
+        <p *ngIf="error.hasError('minlength')">minlength is equal to 3</p>
+      </div>
+    </div>
+
+    <div class="form-group col-md-6">
+      Choisir un type:
+      <select class="form-select form-select-sm" aria-label=".form-select-sm example" formControlName="CategorieId"
+              name="type">
+        <option [value]="categorie.id" *ngFor="let categorie of categoriesList">{{categorie.nom}}</option>
+      </select>
+      <div class=" alert alert-danger" *ngIf="form.CategorieId.touched &&  form.CategorieId.errors  ">
+        <p *ngIf="form.CategorieId.hasError('required')">Type is required</p>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Prix:</label>
+      <input type="number" required formControlName="price" name="price"
+             class="form-control">
+      <div class=" alert alert-danger" *ngIf="form.price.touched &&  form.price.errors  | onlyOneError:['required'] as error">
+        <p *ngIf="error.required">Price is required</p>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Image:</label>
+      <input type="file" required  name="image" (change)="onFileSelected($event)"
+             class="form-control">
+      <progress id="file" [value]="uploadProgress" max="100" *ngIf="uploadProgress"> {{uploadProgress}} </progress>
+    </div>
+
+
+    <button [disabled]="!formProduct.valid" class="btn btn-success" *ngIf="!id" (click)="saveProduct()">Ajouter</button>
+    <button  class="btn btn-warning" (click)="saveProduct()" *ngIf="id">Modifier</button>
+  </form>
+
+</div>

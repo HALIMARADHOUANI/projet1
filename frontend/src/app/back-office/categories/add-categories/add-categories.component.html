@@ -1,0 +1,21 @@
+<h6 *ngIf="!id">Ajouter les commentaires</h6>
+<h6 *ngIf="id">Modifier categorie</h6>
+
+
+<form class="form-horizontal" role="form" [formGroup]="formCategory">
+
+  <div class="form-group">
+    <label class="col-lg-3 control-label">Nom: </label>
+    <div class="col-lg-8">
+      <input class="form-control" type="text" name="nom" formControlName="nom"
+             placeholder="Ajouter nom .....">
+      <div *ngIf="formCategory.controls.nom.touched && formCategory.controls.nom.invalid" class="alert alert-danger">
+        <div *ngIf="formCategory.controls.nom.hasError('required')"> id est obligatoire</div>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" (click)="addCategory()" *ngIf="!id" [disabled]="!formCategory.valid">Add</button>
+  <button type="submit" class="btn btn-warning" (click)="updateCategory()" *ngIf="id" >Update</button>
+</form>
+

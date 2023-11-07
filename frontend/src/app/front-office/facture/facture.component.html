@@ -1,0 +1,75 @@
+<div class="receipt-content">
+
+  <div class="container bootstrap snippets bootdey">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="invoice-wrapper" id="print-section">
+          <div class="text-left text-150">
+            <img src="assets/images/TenStep.jpg" width="200"><br>
+          </div>
+          <br>
+
+
+          <div class="payment-info">
+            <div class="row">
+              <div class="col-sm-6">
+                <span>Facture No.</span>
+                <strong>#00{{Com.id}}</strong>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="payment-details">
+            <div class="row">
+              <div class="col-sm-6">
+                <span>Client</span>
+                <strong>
+                  Client
+                </strong>
+                <p><a href="">  {{Com.Livraison.Commande.panier.User.nom}}</a></p>
+              </div>
+              <div class="col-sm-6 text-right">
+
+                <strong>
+                  Email
+                </strong>
+                <p>
+
+                  <a href="#">
+                    {{Com.Livraison.Commande.panier.User.email}}
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="line-items">
+            <div class="headers clearfix">
+              <div class="row">
+                <div class="col-xs-5 text-right">Prix</div>
+              </div>
+            </div>
+            <div class="items">
+
+
+              <div class="row item">
+
+                <div class="col-xs-5 amount text-right">
+                  {{Com.Livraison.Commande.prixTotal}} Dtn
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="print">          <button kendo-button (click)="print()" type="button" class="btn btn-outline-primary">
+            Imprimer
+          </button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

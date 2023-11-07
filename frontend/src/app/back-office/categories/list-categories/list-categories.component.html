@@ -1,0 +1,34 @@
+<div class="row ">
+  <h2>List Produit</h2>
+  <a class=" btn btn-sm btn-success btn-add" routerLink="/add-categorie">Ajouter </a>
+</div>
+
+<form>
+
+</form>
+<table class="table table-striped">
+  <tr>
+    <th>Nom</th>
+    <th>Actions</th>
+
+  </tr>
+  <tbody *ngFor="let categorie of categoriesList;let i=index">
+  <tr>
+
+    <td>{{categorie.nom}}</td>
+
+    <td>
+      <button (click)="delete(categorie,i)" class=" btn btn-sm btn-danger">Delete</button>
+      <a class=" btn btn-sm btn-warning" [routerLink]="['/edit-categorie/'+categorie.id]">Update </a></td>
+  </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+

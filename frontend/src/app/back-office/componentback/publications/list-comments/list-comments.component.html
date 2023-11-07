@@ -1,0 +1,35 @@
+<div class="col-md-3">
+  <h6><strong> les listes des commentaires </strong></h6><br>
+
+  <table class="table table-striped table-hover" center>
+    <thead>
+    <tr>
+      <th scope="row">Id_comment</th>
+      <th scope="row">Id_pub</th>
+      <th scope="col">Continu_commentaire</th>
+      <th scope="col">Date_create_commentaire</th>
+      <th scope="col">Date_modifier_commentaire</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <!--<tbody *ngFor="let p of cs"></tbody>-->
+    <tbody *ngFor="let p of cs">
+
+    <tr>
+      <td scope="row">{{p.id_comment}}</td>
+      <td scope="row">{{p.id_pub}}</td>
+      <td scope="col">{{p.continu_commentaire}}</td>
+      <td scope="col">{{p.date_create_commentaire}}</td>
+      <td scope="col">{{p.date_modifier_commentaire}}</td>
+      <td>
+      <td>
+        <button (click)="delete(p.id_comment)">Delete</button>
+      </td>
+      <td>
+        <button [routerLink]="['/updateStage', p.id_comment]">Update</button>
+      </td>
+    </tr>
+
+
+    </tbody>
+  </table>

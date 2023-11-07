@@ -1,0 +1,10 @@
+.headCart{
+  display: grid;
+  grid-template-columns: 3fr .5fr;
+}
+.headCart span{
+  text-align: right;
+}
+.cartBox{
+  margin-top: -25px;
+}

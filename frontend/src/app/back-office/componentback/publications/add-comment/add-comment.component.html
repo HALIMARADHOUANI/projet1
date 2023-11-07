@@ -1,0 +1,63 @@
+<h6>Ajouter les commentaires</h6>
+
+
+<form class="form-horizontal" role="form" [formGroup]="formComment">
+
+  <div class="form-group">
+    <label class="col-lg-3 control-label">id_comment: </label>
+    <div class="col-lg-8">
+      <input class="form-control" type="number" name="id_comment" formControlName="id_comment" required
+             placeholder="Add id .....">
+      <div *ngIf="form.id_comment.touched && form.id_comment.invalid" class="alert alert-danger">
+        <div *ngIf="form.id_comment.errors?.['required']"> id est obligatoire</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-lg-3 control-label">id_pub: </label>
+    <div class="col-lg-8">
+      <input class="form-control" type="number" name="id_pub" formControlName="id_pub" required
+             placeholder="Add id.....">
+      <div *ngIf="form.id_pub.touched && form.id_pub.invalid" class="alert alert-danger">
+        <div *ngIf="form.id_pub.errors?.['required']"> id est obligatoire</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-lg-3 control-label">continue commentaire:</label>
+    <div class="col-lg-8">
+      <input class="form-control" type="text" name="continue_comment" formControlName="continue_comment" required
+             placeholder="Add le date .....">
+      <div *ngIf="form.continue_comment.touched && form.continue_comment.invalid" class="alert alert-danger">
+        <div *ngIf="form.continue_comment.errors?.['required']"> continu_commentaire est obligatoire</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-lg-3 control-label">date_create_commentaire:</label>
+    <div class="col-lg-8">
+      <input class="form-control" type="date" name="date_create_comment" formControlName="date_create_comment"
+             required placeholder="Add libelle Archive.....">
+      <div *ngIf="form.date_create_comment.touched && form.date_create_comment.invalid" class="alert alert-danger">
+        <div *ngIf="form.date_create_comment.errors?.['required']"> libelle est obligatoire</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-lg-3 control-label">date_modifier_commentair:</label>
+    <div class="col-lg-8">
+      <input class="form-control" type="date" name="date_modifier_commentaire"
+             formControlName="date_modifier_commentaire" required placeholder="Add quantite .....">
+      <div *ngIf="form.date_modifier_comment.touched && form.date_modifier_comment.invalid" class="alert alert-danger">
+        <div *ngIf="form.date_modifier_comment.errors?.['required']"> quantite est obligatoire</div>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Add commentaire</button>
+</form>
+

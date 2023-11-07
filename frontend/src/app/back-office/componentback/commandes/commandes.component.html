@@ -1,0 +1,41 @@
+<div class="row ">
+  <h2>Liste des Commandes</h2>
+</div>
+
+<form>
+
+</form>
+<table class="table table-striped">
+  <tr>
+    <th>User</th>
+    <th>Date de livraison</th>
+    <th>Prix</th>
+    <th>Etat</th>
+    <th>Actions</th>
+
+  </tr>
+  <tbody *ngFor="let command of commandsList;let i=index">
+  <tr>
+    <td>{{command['panier.User.nom']}}</td>
+    <td>{{command.dateCommande | date:'short'}}</td>
+    <td>{{command.prixTotal}}</td>
+    <td>{{command.etatCommande === 'PENDING' ? 'en cours' : (command.etatCommande === 'ACCEPTED'?'Accepté':'refusé')}}</td>
+
+    <td *ngIf="command.etatCommande === 'PENDING' else noPending">
+      <button (click)="accepter(command)" class=" btn btn-sm btn-success">Accepter</button>
+      <button (click)="refuser(command)" class=" btn btn-sm btn-danger">Refuser</button>
+  </tr>
+  <ng-template #noPending>
+    <tr></tr>
+  </ng-template>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+

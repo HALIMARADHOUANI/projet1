@@ -1,0 +1,131 @@
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">All profils</h6>
+    </div>
+
+    <div class="card-body">
+
+      <div class="table-responsive" [formGroup]="formSearch">
+        <input type="text" formControlName="queue" (change)="search()" class="form-control">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Rôle</th>
+            <th>Active</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tfoot>
+          <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Rôle</th>
+            <th>Active</th>
+            <th>Actions</th>
+          </tr>
+          </tfoot>
+          <tbody>
+
+          <tr *ngFor="let item of dataArray;index as i">
+            <td>{{item.nom}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.role}}</td>
+            <td>{{item.active}}</td>
+            <td>
+              <button class="btn btn-success" (click)="getData(item.nom,item.prenom,item.numTel,item.id)"
+                      data-toggle="modal" data-target="#exampleModal">Update
+              </button>
+              <button class="btn btn-danger" (click)="delete(item.id,i)">Delete</button>
+              <button class="btn btn-warning" *ngIf="item.active" (click)="desactivate(item.id)">Bloque</button>
+              <button class="btn btn-info" *ngIf="!item.active" (click)="activate(item.id)">Activate</button>
+            </td>
+          </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" [formGroup]="formProfile">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier Donnée</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- form update start here -->
+        <form [formGroup]="formProfile">
+          <!-- firstName validation start here -->
+          <div class="form-group">
+
+            <label for="nom">Firstname</label>
+            <input type="text" class="form-control" placeholder="firstName" formControlName="nom" id="nom"
+                   name="nom">
+          </div>
+          <div class="alert alert-danger" *ngIf="form.nom.hasError('required') && form.nom.touched">
+FirstName is required
+          </div>
+          <div class="alert alert-danger" *ngIf="form.nom.hasError('minlength') && form.nom.touched">
+FirstName must be minimum 2 caractere
+          </div>
+          <!-- lastName validation end here -->
+
+          <!-- lastName validation start here -->
+          <div class="form-group">
+            <label for="prenom">prenom</label>
+            <input type="text" class="form-control" placeholder="prenom" formControlName="prenom" id="prenom"
+                   name="prenom">
+          </div>
+          <div class="alert alert-danger" *ngIf="form.prenom.hasError('required') && form.prenom.touched">
+prenom is required
+          </div>
+          <div class="alert alert-danger" *ngIf="form.prenom.hasError('minlength') && form.prenom.touched">
+prenom must be minimum 2 caractere
+          </div>
+          <!-- lastName validation end here -->
+
+
+          <!-- Phone validation start here -->
+
+          <div class="form-group">
+            <label for="numTel">Phone</label>
+            <input type="number" class="form-control" placeholder="numTel" formControlName="numTel" id="numTel"
+                   name="numTel">
+          </div>
+          <div class="alert alert-danger" *ngIf="form.numTel.hasError('required') && form.numTel.touched">
+phone is required
+          </div>
+          <!-- Phone validation end here -->
+
+          <div class="alert alert-success" *ngIf="messageSuccess">
+            {{messageSuccess}}
+          </div>
+
+          <button class="btn btn-primary" (click)="updateNewProfile()">Update profil
+          </button>
+        </form>
+
+
+        <!-- form update end here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="refresh()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

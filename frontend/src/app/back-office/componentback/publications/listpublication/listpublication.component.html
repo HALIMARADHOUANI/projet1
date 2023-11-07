@@ -1,0 +1,58 @@
+<div class="container">
+  {{posts.length}}
+  <div class="row justify-content-center py-2" *ngFor="let post of posts; let i = index">
+    <div class="card " style="width: 30rem;">
+      <img *ngIf="post.picture"
+           [src]="apiImg+post.picture"
+           class="card-img-top pt-5"
+           alt="..."
+           style="height: 20rem"
+      />
+      <div class="card-body">
+        <p class="card-text">
+          {{ post.nom_pub }}
+        </p>
+        <h5 class="card-title" style="    text-align: end;    font-size: 11px;">{{ calculateDiff(post.createdAt)  }}days
+          ago</h5>
+        <div class="actions d-flex justify-content-evenly">
+          <button class="btn btn-success" (click)="showDialog(post)">Liste des commentaires
+          </button>
+          <button class="btn btn-danger" (click)="deletePost(post,i)" >Delete</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="overlay" *ngIf="popup">
+  <div class="popup">
+    <h5>Commentaires</h5>
+    <a class="close" (click)="popup = false">&times;</a>
+    <div class="row" >
+
+      <div class="row justify-content-center py-2" *ngFor="let comment of comments; let i = index">
+        <div class="card " style="width: 30rem;">
+
+          <div class="card-body">
+            <p class="card-text" [ngStyle]="{'text-align':user.id!==comment.UserId?'right':'left'}">
+              {{ comment.contenue_commentaires }}
+            </p>
+            <p class="card-text" [ngStyle]="{'text-align':user.id!==comment.UserId?'left':'right'}">
+              {{ comment.User.nom }}
+            </p>
+
+            <h5 class="card-title" style="    text-align: end;    font-size: 11px;">{{ calculateDiff(comment.createdAt)  }}</h5>
+            <div class="actions d-flex justify-content-evenly" >
+              <button class="btn btn-danger" (click)="deleteComment(comment,i)" >Delete</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

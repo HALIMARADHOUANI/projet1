@@ -1,0 +1,102 @@
+<div class="container">
+
+  <div class="row justify-content-center" [formGroup]="formPost">
+    <div class="col-md-6 col-xs-12 col-sm-6">
+      <div class="mb-3">
+        <input
+          type="text"
+          class="form-control"
+          name="nom_pub"
+          formControlName="nom_pub"
+          placeholder="Type here ..."
+        />
+        <p *ngIf="fileName">{{fileName}}</p>
+      </div>
+    </div>
+
+    <div class="col-md-1 col-xs-12 col-sm-6">
+      <button type="button" class="btn btn-primary btn-add" (click)="addPost()">
+        Ajouter
+      </button>
+    </div>
+    <div class="col-md-1 col-xs-12 col-sm-6">
+      <a class="btn btn-warning btn-square d-flex justify-content-center align-content-center"
+         (click)="fileUpload.click()">
+        <i class="far fa-file"></i>
+      </a>
+      <input type="file" class="file-input" accept="image/*" #fileUpload (change)="onFileSelected($event)">
+    </div>
+  </div>
+  <div class="row justify-content-center py-2" *ngFor="let post of posts; let i = index">
+    <div class="card " style="width: 30rem;">
+      <img *ngIf="post.picture"
+           [src]="apiImg+post.picture"
+           class="card-img-top pt-5"
+           alt="..."
+           style="height: 20rem"
+      />
+      <div class="card-body">
+        <p class="card-text">
+          {{ post.nom_pub }}
+        </p>
+        <h5 class="card-title" style="    text-align: end;    font-size: 11px;">{{ calculateDiff(post.createdAt)  }}days
+          ago</h5>
+        <div class="actions d-flex justify-content-evenly">
+          <button class="btn btn-info">Details</button>
+          <button class="btn btn-success" (click)="showDialog(post,user)">Commenter
+          </button>
+          <button class="btn btn-danger" (click)="deletePost(post,i)" *ngIf="post.UserId===user.id">Delete</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="overlay" *ngIf="popup">
+  <div class="popup">
+    <h5>Ajouter un commentaire</h5>
+    <a class="close" (click)="popup = false">&times;</a>
+    <div class="row" [formGroup]="formComment">
+      <div class="col-md-12 col-xs-12 col-sm-6">
+        <input style="display: none" formControlName="PublicationId">
+        <input style="display: none" formControlName="UserId">
+        <input class="form-control mb-3" formControlName="contenue_commentaires">
+      </div>
+      <div class="col-md-1 col-xs-12 col-sm-6 justify-content-end">
+        <button class="btn btn-success" [disabled]="!formComment.valid" (click)="commentPost()">Répondre
+      </button>
+      <button class="btn btn-success" [disabled]="!formComment.valid" (click)="update()" *ngIf="edit">Modifier
+      </button>
+      </div>
+      <div class="row justify-content-center py-2" *ngFor="let comment of comments; let i = index">
+        <div class="card " style="width: 30rem;">
+
+          <div class="card-body">
+            <div class="card-header justify-content-between d-flex">
+              <p class="card-text" [ngStyle]="{'text-align':user.id!==comment.UserId?'right':'left'}">
+                {{ comment.contenue_commentaires }}
+              </p>
+              <p class="card-text" [ngStyle]="{'text-align':user.id!==comment.UserId?'left':'right'}">
+                {{ comment.User.nom }}
+              </p>
+            </div>
+            <h5 class="card-header-pills"
+                style="    text-align: end;    font-size: 11px;">{{ calculateDiff(comment.createdAt)  }}</h5>
+            <div class="actions d-flex justify-content-evenly" *ngIf="user.id===comment.UserId">
+              <button class="btn btn-danger" (click)="deleteComment(comment,i)" *ngIf="comment.UserId===user.id">Delete
+              </button>
+              <button class="btn btn-warning" (click)="editComment(comment,i)" *ngIf="comment.UserId===user.id">Edit
+              </button>
+            </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
